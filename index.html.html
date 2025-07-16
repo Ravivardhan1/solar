@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar-Powered EV Charging</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- Enhanced Table Styles -->
+  <link rel="stylesheet" href="enhanced-table.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #87CEEB, #F5F5F5);
+      font-family: 'Open Sans', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #7dd1a4;
+      font-family: 'Montserrat', sans-serif;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .nav-link {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    .hero-section {
+      background: none;
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+    .hero-section iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 0;
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      max-width: 800px;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .hero-button {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 30px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    .hero-button:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: translateX(-50%) scale(1.05);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .hero-section h1, .hero-section p, .hero-section a {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-section h1 {
+      font-family: 'Montserrat', sans-serif;
+      color: #FFC107;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .hero-section p {
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+    .btn-primary {
+      background-color: #4CAF50;
+      border-color: #4CAF50;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      background-color: #388E3C;
+    }
+    .content-section {
+      background-color: #fff;
+      padding: 40px 15px;
+      border-radius: 10px;
+      margin-top: 80px;
+      height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+    .content-section h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFC107;
+      margin-bottom: 1rem;
+    }
+    .content-section p {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    .benefits-section {
+      background-color: #87CEEB;
+      padding: 40px 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      height: auto;
+    }
+    .benefits-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+    .benefit-item {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .benefit-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .benefit-item p {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .img-fluid {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
+    .img-fluid:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    /* Enhanced Pagination Styles */
+    .pagination-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      z-index: 1000;
+    }
+    .pagination {
+      margin: 0;
+      padding: 0;
+    }
+    .page-item {
+      margin: 0 2px;
+    }
+    .page-link {
+      border: none;
+      padding: 10px 15px;
+      margin: 0 2px;
+      border-radius: 5px;
+      color: #333;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+    .page-link:hover {
+      background: #FFC107;
+      color: #000;
+      transform: translateY(-2px);
+    }
+    .page-item.active .page-link {
+      background: #FFC107;
+      color: #000;
+      font-weight: bold;
+    }
+    .page-item.disabled .page-link {
+      background: #f8f9fa;
+      color: #6c757d;
+      cursor: not-allowed;
+    }
+    .page-item:first-child .page-link,
+    .page-item:last-child .page-link {
+      border-radius: 5px;
+    }
+    .pagination-info {
+      margin-top: 10px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 60px 15px;
+      }
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      .hero-section p {
+        font-size: 1rem;
+      }
+      .content-section h1 {
+        font-size: 1.75rem;
+      }
+      .benefits-section h2 {
+        font-size: 1.75rem;
+      }
+      .page-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .image-container {
+        padding-top: 75%; /* 4:3 Aspect Ratio for mobile */
+      }
+      .img-fluid {
+        aspect-ratio: 4/3;
+      }
+    }
+    
+    /* Loading Spinner Styles */
+    #pageLoader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .section-loader {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .spinner-border {
+      width: 3rem;
+      height: 3rem;
+      color: #FFC107;
+    }
+    
+    .content-section, .benefits-section {
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+    
+    .content-section.loaded, .benefits-section.loaded {
+      opacity: 1;
+    }
+    
+    .hero-section {
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+    
+    .hero-section.loaded {
+      opacity: 1;
+    }
+
+    /* Responsive Image Container */
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Dropdown Menu Styles */
+    .dropdown-menu {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 8px 0;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-item {
+      color: #333;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dropdown-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background-color: #4CAF50;
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-item:hover::before {
+      transform: scaleY(1);
+    }
+
+    .dropdown-item i {
+      color: #4CAF50;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+      background: #f8f9fa;
+      color: #4CAF50;
+      transform: translateX(5px);
+    }
+
+    .dropdown-item:hover i {
+      transform: scale(1.2);
+    }
+
+    .dropdown-item.active {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .dropdown-item.active i {
+      color: white;
+    }
+
+    .dropdown-divider {
+      border-color: #eee;
+      margin: 8px 0;
+    }
+
+    .dropdown-header {
+      color: #666;
+      font-size: 0.85rem;
+      padding: 8px 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .dropdown-toggle::after {
+      transition: transform 0.3s ease;
+    }
+
+    .show.dropdown .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+      .dropdown-menu {
+        background: #fff;
+        border: none;
+        box-shadow: none;
+        animation: slideIn 0.3s ease-in-out;
+      }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-10px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .dropdown-item {
+        padding: 12px 20px;
+      }
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+      color: #ffffff;
+    }
+
+    body.dark-mode .navbar {
+      background-color: #2d2d2d;
+    }
+
+    body.dark-mode .navbar-brand,
+    body.dark-mode .nav-link {
+      color: #ffffff !important;
+    }
+
+    body.dark-mode .content-section,
+    body.dark-mode .benefits-section {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    body.dark-mode .benefit-item {
+      background-color: #4a4a4a;
+    }
+
+    body.dark-mode .card {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    body.dark-mode .card-body {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    body.dark-mode .list-group-item {
+      background-color: #333333;
+      color: #ffffff;
+      border-color: #4a4a4a;
+    }
+
+    body.dark-mode .pagination-container {
+      background: rgba(45, 45, 45, 0.9);
+    }
+
+    body.dark-mode .page-link {
+      background: #333333;
+      color: #ffffff;
+    }
+
+    body.dark-mode .page-link:hover {
+      background: #FFC107;
+      color: #000000;
+    }
+
+    body.dark-mode .dropdown-menu {
+      background: #333333;
+      border-color: #4a4a4a;
+    }
+
+    body.dark-mode .dropdown-item {
+      color: #ffffff;
+    }
+
+    body.dark-mode .dropdown-item:hover {
+      background: #4a4a4a;
+      color: #FFC107;
+    }
+
+    body.dark-mode .dropdown-divider {
+      border-color: #4a4a4a;
+    }
+
+    body.dark-mode .dropdown-header {
+      color: #cccccc;
+    }
+
+    /* Theme Toggle Button Styles */
+    .theme-toggle {
+      background: #FFC107;
+      border: none;
+      padding: 10px 15px;
+      margin-right: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .theme-toggle i {
+      font-size: 1.4rem;
+      color: #000;
+    }
+
+    body.dark-mode .theme-toggle {
+      background: #FFC107;
+    }
+
+    body.dark-mode .theme-toggle i {
+      color: #000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Add smooth scrolling behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Add section IDs for navigation */
+    #hero { scroll-margin-top: 70px; }
+    #how-it-works { scroll-margin-top: 70px; }
+    #benefits { scroll-margin-top: 70px; }
+    #contact { scroll-margin-top: 70px; }
+
+    /* Update navigation styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #7dd1a4;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add active state for navigation */
+    .nav-link.active {
+      color: #FFC107 !important;
+      font-weight: 600;
+    }
+
+    /* Update content spacing */
+    .content-section, .benefits-section {
+      padding-top: 80px;
+    }
+
+    /* Remove pagination styles */
+    .pagination-container,
+    .pagination,
+    .page-item,
+    .page-link,
+    .pagination-info {
+      display: none;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1200px) {
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .hero-content p {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-content {
+        max-width: 90%;
+        padding: 20px;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .content-section, .benefits-section {
+        padding: 40px 15px;
+      }
+      .benefit-item {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        height: 80vh;
+      }
+      .hero-content {
+        padding: 15px;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      .hero-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+      .content-section .row {
+        flex-direction: column-reverse;
+      }
+      .content-section .col-md-6 {
+        margin-bottom: 30px;
+      }
+      .benefits-section h2 {
+        font-size: 1.8rem;
+      }
+      .benefit-item h3 {
+        font-size: 1.3rem;
+      }
+      .benefit-item p {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-section {
+        height: 70vh;
+      }
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .navbar-brand {
+        font-size: 1.2rem;
+      }
+      .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .content-section h1 {
+        font-size: 1.6rem;
+      }
+      .card {
+        margin-bottom: 15px;
+      }
+      .list-group-item {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Touch-friendly styles for mobile */
+    @media (hover: none) {
+      .hero-button {
+        padding: 12px 25px;
+      }
+      .nav-link {
+        padding: 0.8rem 1rem;
+      }
+    }
+
+    /* Landscape mode adjustments */
+    @media (max-height: 600px) and (orientation: landscape) {
+      .hero-section {
+        height: 100vh;
+      }
+      .hero-content {
+        padding: 10px;
+      }
+      .hero-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+    }
+
+    /* High DPI screens */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .hero-content {
+        backdrop-filter: blur(8px);
+      }
+    }
+
+    /* Dark mode responsive adjustments */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1a1a1a;
+        color: #ffffff;
+      }
+      .hero-content {
+        background: rgba(0, 0, 0, 0.7);
+      }
+      .card {
+        background: #2d2d2d;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Loader -->
+  <div id="pageLoader">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Section Loaders -->
+  <div class="section-loader" id="heroLoader">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="section-loader" id="contentLoader">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="section-loader" id="benefitsLoader">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-dark" href="#hero">
+        <i class="bi bi-lightning-charge-fill text-warning"></i> SolarEV
+      </a>
+      <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+        <i class="bi bi-moon-stars"></i>
+      </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#hero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="pag2.html">How It Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="pag3.html">Benefits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="pag5.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="pag2.html">Next Page <i class="bi bi-arrow-right"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="hero" class="hero-section">
+    <iframe src='https://my.spline.design/earthdayandnight-8bfLEenwX84XrcYE4hM4ptCs/' frameborder='0' width='100%' height='100%'></iframe>
+    <div class="hero-content">
+      <h1>Solar-Powered Future</h1>
+      <p>Imagine a world where your EV and mobile devices are powered by the sun</p>
+    </div>
+    <a href="pag2.html" class="btn btn-primary btn-lg hero-button">
+      <i class="bi bi-arrow-right-circle"></i> Explore Possibilities
+    </a>
+  </div>
+
+  <div id="how-it-works" class="container content-section mt-5">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1 class="display-6 fw-bold">Solar Technology in EVs and Mobiles <span class="badge bg-warning">Innovation</span></h1>
+        <p class="lead">Discover how solar energy can revolutionize your daily commute and device usage.</p>
+        
+        <!-- Code Block Example -->
+        <div class="card bg-dark text-light mb-4">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-code-square"></i> Solar Integration</h5>
+            <pre class="bg-dark text-light"><code>// Solar Charging System
+const solarSystem = {
+  evCharging: "Solar-powered charging stations",
+  mobileCharging: "Portable solar chargers",
+  efficiency: "90%",
+  sustainability: "100% renewable"
+};</code></pre>
+          </div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-gear"></i> Key Features</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <i class="bi bi-check-circle-fill text-success"></i> EV Solar Charging: 8-10 hours full charge
+              </li>
+              <li class="list-group-item">
+                <i class="bi bi-check-circle-fill text-success"></i> Mobile Solar Charging: 2-3 hours full charge
+              </li>
+              <li class="list-group-item">
+                <i class="bi bi-check-circle-fill text-success"></i> 24/7 Power Availability
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="image-container">
+            <img src="solar-ev-mobile.jpg" alt="Solar EV and Mobile Charging" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="benefits" class="container mt-5 benefits-section">
+    <h2 class="text-center display-5 fw-bold">Advantages <span class="badge bg-success">Eco</span></h2>
+    <div class="row mt-4">
+      <div class="col-md-4 benefit-item text-center">
+        <i class="bi bi-lightning-charge display-4 text-white mb-3"></i>
+        <h3 class="h4 fw-bold">Sustainable Power</h3>
+        <p class="lead">Clean energy for your vehicles and devices</p>
+      </div>
+      <div class="col-md-4 benefit-item text-center">
+        <i class="bi bi-currency-dollar display-4 text-white mb-3"></i>
+        <h3 class="h4 fw-bold">Cost Effective</h3>
+        <p class="lead">Reduce electricity bills significantly</p>
+      </div>
+      <div class="col-md-4 benefit-item text-center">
+        <i class="bi bi-globe display-4 text-white mb-3"></i>
+        <h3 class="h4 fw-bold">Eco-Friendly</h3>
+        <p class="lead">Zero carbon footprint charging</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact" class="container mt-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <form id="contactForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="contact-info">
+          <h4>Get in Touch</h4>
+          <p><i class="bi bi-geo-alt"></i> 123 Solar Street, Green City</p>
+          <p><i class="bi bi-envelope"></i> info@solarev.com</p>
+          <p><i class="bi bi-telephone"></i> +91 9573687736</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to show content immediately
+    function showContent() {
+      // Show all main sections
+      document.querySelectorAll('.hero-section, .content-section, .benefits-section').forEach(section => {
+        section.style.display = 'block';
+        section.style.opacity = '1';
+      });
+      
+      // Show all images
+      document.querySelectorAll('img').forEach(img => {
+        img.style.opacity = '1';
+        img.style.transition = 'opacity 0.5s ease-in';
+      });
+      
+      // Hide loaders
+      document.getElementById('pageLoader').style.display = 'none';
+      document.querySelectorAll('.section-loader').forEach(loader => {
+        loader.style.display = 'none';
+      });
+    }
+
+    // Show content immediately when DOM is loaded
+    document.addEventListener('DOMContentLoaded', showContent);
+    
+    // Backup: show content when window loads
+    window.addEventListener('load', showContent);
+    
+    // Initialize dropdowns with hover effect
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add hover effect for dropdowns
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('mouseenter', function() {
+          if (window.innerWidth > 768) {
+            this.querySelector('.dropdown-toggle').click();
+          }
+        });
+        
+        dropdown.addEventListener('mouseleave', function() {
+          if (window.innerWidth > 768) {
+            this.querySelector('.dropdown-toggle').click();
+          }
+        });
+      });
+    });
+
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      icon.classList.remove('bi-moon-stars');
+      icon.classList.add('bi-sun');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        icon.classList.remove('bi-moon-stars');
+        icon.classList.add('bi-sun');
+      } else {
+        localStorage.setItem('theme', 'light');
+        icon.classList.remove('bi-sun');
+        icon.classList.add('bi-moon-stars');
+      }
+    });
+
+    // Add active state to navigation based on scroll position
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section[id], div[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      window.addEventListener('scroll', function() {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= (sectionTop - sectionHeight/3)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

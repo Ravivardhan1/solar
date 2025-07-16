@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - SolarEV</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #87CEEB, #F5F5F5);
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #FFC107;
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+    }
+    .form-control {
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .btn-custom {
+      background-color: #4CAF50;
+      color: #fff;
+      border-radius: 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .modal-body {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    .img-fluid {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .img-fluid:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    /* Enhanced Pagination Styles */
+    .pagination-container {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .pagination {
+      margin: 0;
+      padding: 0;
+    }
+    .page-item {
+      margin: 0 2px;
+    }
+    .page-link {
+      border: none;
+      padding: 10px 15px;
+      margin: 0 2px;
+      border-radius: 5px;
+      color: #333;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+    .page-link:hover {
+      background: #FFC107;
+      color: #000;
+      transform: translateY(-2px);
+    }
+    .page-item.active .page-link {
+      background: #FFC107;
+      color: #000;
+      font-weight: bold;
+    }
+    .page-item.disabled .page-link {
+      background: #f8f9fa;
+      color: #6c757d;
+      cursor: not-allowed;
+    }
+    .page-item:first-child .page-link,
+    .page-item:last-child .page-link {
+      border-radius: 5px;
+    }
+    .pagination-info {
+      margin-top: 10px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    /* Breadcrumb Styles */
+    .breadcrumb-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    .breadcrumb {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+    .breadcrumb-item {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.95rem;
+      color: #666;
+    }
+    .breadcrumb-item a {
+      color: #4CAF50;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .breadcrumb-item a:hover {
+      color: #2E7D32;
+    }
+    .breadcrumb-item.active {
+      color: #333;
+      font-weight: 600;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+      color: #4CAF50;
+    }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.75rem;
+      }
+      .form-label {
+        font-size: 1rem;
+      }
+      .page-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .breadcrumb-container {
+        padding: 10px 15px;
+      }
+      .breadcrumb-item {
+        font-size: 0.85rem;
+      }
+    }
+    /* Loading Spinner Styles */
+    #pageLoader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+    
+    .section-loader {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .spinner-border {
+      width: 4rem;
+      height: 4rem;
+      color: #FFC107;
+      border-width: 0.25rem;
+    }
+
+    .spinner-text {
+      margin-top: 1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .container {
+      opacity: 1;
+      display: block;
+    }
+
+    #pageLoader {
+      display: none;
+    }
+
+    .section-loader {
+      display: none;
+    }
+
+    .loading-overlay {
+      display: none;
+    }
+
+    /* Ensure content is visible */
+    .content-section, .benefits-section, .hero-section {
+      opacity: 1;
+      display: block;
+    }
+
+    /* Table visibility */
+    #userInputTable {
+      opacity: 1;
+      display: table;
+    }
+
+    .benefits-section {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 40px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+    .benefits-section.loaded {
+      opacity: 1;
+    }
+    .benefit-card {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+    .benefit-card:hover {
+      transform: translateY(-5px);
+    }
+    .benefit-icon {
+      font-size: 2rem;
+      color: #4CAF50;
+      margin-bottom: 1rem;
+    }
+    .benefit-title {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .benefit-description {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    .service-highlights {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .highlight-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .highlight-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    @media (max-width: 768px) {
+      h2 { font-size: 1.75rem; }
+      h3 { font-size: 1.25rem; }
+      .page-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+    }
+    /* Add these new styles for tooltips and alerts */
+    .custom-tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .custom-tooltip .tooltip-text {
+      visibility: hidden;
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .custom-tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .alert-custom {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+    }
+
+    .popup-content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      animation: popIn 0.3s ease-out;
+    }
+
+    @keyframes popIn {
+      from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="pageLoader">
+      <div class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-text">Loading Contact Form...</div>
+      </div>
+    </div>
+  
+    <!-- Section Loader -->
+    <div class="section-loader" id="contentLoader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-text">Loading Content...</div>
+    </div>
+  <div class="container mt-5">
+    <h2>Contact Us <span class="badge bg-warning">Reach Out</span></h2>
+    <div class="row">
+      <div class="col-md-6">
+        <form id="contactForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">
+              <i class="bi bi-person-circle me-2"></i>Name
+            </label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">
+              <i class="bi bi-envelope me-2"></i>Email
+            </label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">
+              <i class="bi bi-telephone me-2"></i>Phone
+            </label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+              <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="subject" class="form-label">
+              <i class="bi bi-chat-dots me-2"></i>Subject
+            </label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-chat-dots-fill"></i></span>
+              <select class="form-select" id="subject" required>
+                <option value="">Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="installation">Installation Request</option>
+                <option value="maintenance">Maintenance Support</option>
+                <option value="billing">Billing Question</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">
+              <i class="bi bi-pencil-square me-2"></i>Message
+            </label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+              <textarea class="form-control" id="message" rows="4" placeholder="Type your message here..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-custom">
+            <i class="bi bi-send me-2"></i>Submit
+          </button>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="contact-info p-4 bg-light rounded">
+          <h4 class="mb-4"><i class="bi bi-info-circle me-2"></i>Why Contact Us?</h4>
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Expert consultation for solar EV charging solutions
+            </li>
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Free site assessment and cost estimation
+            </li>
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              24/7 technical support and maintenance
+            </li>
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Customized solutions for your specific needs
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Input Table -->
+    <div class="mt-5">
+      <h3 class="mb-4">
+        <i class="bi bi-table me-2"></i>Submitted Inquiries
+      </h3>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover" id="userInputTable">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Subject</th>
+              <th>Message</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table rows will be added dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Feedback Section -->
+  <div class="container mt-5">
+    <h3 class="text-center mb-4">
+      <i class="bi bi-star-fill text-warning me-2"></i>Customer Feedback
+    </h3>
+    <div class="row">
+      <!-- Feedback Card 1 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-person-circle text-primary me-2" style="font-size: 2rem;"></i>
+              <div>
+                <h5 class="card-title mb-0">Sarah Johnson</h5>
+                <small class="text-muted">Tesla Model 3 Owner</small>
+              </div>
+            </div>
+            <p class="card-text">
+              "The solar charging setup has been a game-changer. I'm saving significantly on my electricity bills while charging my EV sustainably."
+            </p>
+            <div class="text-warning">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Card 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-person-circle text-success me-2" style="font-size: 2rem;"></i>
+              <div>
+                <h5 class="card-title mb-0">Michael Chen</h5>
+                <small class="text-muted">Nissan Leaf Owner</small>
+              </div>
+            </div>
+            <p class="card-text">
+              "Professional installation and excellent customer service. The monitoring app helps me track my energy savings effectively."
+            </p>
+            <div class="text-warning">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-half"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Card 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-person-circle text-info me-2" style="font-size: 2rem;"></i>
+              <div>
+                <h5 class="card-title mb-0">Emily Rodriguez</h5>
+                <small class="text-muted">Chevrolet Bolt Owner</small>
+              </div>
+            </div>
+            <p class="card-text">
+              "The solar panels are working great! I love being able to charge my car with clean energy and reduce my carbon footprint."
+            </p>
+            <div class="text-warning">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="container mt-5">
+    <h3 class="text-center mb-4">
+      <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+    </h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="accordion" id="faqAccordion">
+          <!-- FAQ Item 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                <i class="bi bi-lightning-charge me-2"></i>How long does installation take?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Installation typically takes 1-2 days, depending on the complexity of your setup. We ensure minimal disruption to your daily routine.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                <i class="bi bi-currency-dollar me-2"></i>What are the cost savings?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Most customers see a 40-60% reduction in their electricity bills for EV charging. The exact savings depend on your location and usage patterns.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                <i class="bi bi-shield-check me-2"></i>Is it weather-resistant?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes, our solar charging stations are designed to withstand various weather conditions, including rain, snow, and extreme temperatures.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-lightbulb me-2"></i>Tips for EV Owners
+            </h5>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Charge during off-peak hours for maximum savings
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Regular maintenance ensures optimal performance
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Monitor your energy consumption through our app
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Consider battery storage for backup power
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- References Section -->
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header bg-light">
+        <h4 class="mb-0">
+          <i class="bi bi-book me-2"></i>References
+        </h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+          <li class="mb-3">
+            <i class="bi bi-link-45deg text-primary me-2"></i>
+            <a href="https://www.toyota.com/bz4x/" target="_blank" class="text-decoration-none">
+              Toyota - Solar-Powered EV Charging Station Development
+            </a>
+            <small class="text-muted d-block">Toyota's official announcement on solar-powered charging infrastructure</small>
+          </li>
+          <li class="mb-3">
+            <i class="bi bi-link-45deg text-primary me-2"></i>
+            <a href="https://activity.infinixmobility.com/mwc2025" target="_blank" class="text-decoration-none">
+              Infinix - Solar-Powered Smartphone Technology
+            </a>
+            <small class="text-muted d-block">Infinix's innovation in solar-powered mobile devices</small>
+          </li>
+
+          <li class="mb-3">
+            <i class="bi bi-link-45deg text-primary me-2"></i>
+            <a href="https://www.epa.gov/greenvehicles/electric-vehicle-myths" target="_blank" class="text-decoration-none">
+              EPA - Electric Vehicle Myths
+            </a>
+          </li>
+          <li class="mb-3">
+            <i class="bi bi-link-45deg text-primary me-2"></i>
+            <a href="https://www.iea.org/reports/global-ev-outlook-2023" target="_blank" class="text-decoration-none">
+              International Energy Agency - Global EV Outlook 2023
+            </a>
+          </li>
+          <li class="mb-3">
+            <i class="bi bi-link-45deg text-primary me-2"></i>
+            <a href="https://www.solarpowerworldonline.com/2023/03/solar-powered-ev-charging-stations/" target="_blank" class="text-decoration-none">
+              Solar Power World - Solar-Powered EV Charging Stations
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-5 py-4 bg-dark text-light position-relative">
+    <div class="container-fluid">
+      <div class="row">
+      
+        <!-- Company Info -->
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+          <h5 class="mb-3">About SolarEV</h5>
+          <p class="text-muted">
+            Leading provider of solar-powered EV charging solutions. We're committed to sustainable transportation and renewable energy integration.
+          </p>
+          <div class="social-links mt-3">
+            <a href="https://www.linkedin.com/company/solarev" target="_blank" class="text-muted text-decoration-none me-3 custom-tooltip" data-bs-toggle="tooltip" title="Follow us on LinkedIn">
+              <i class="bi bi-linkedin"></i>
+              <span class="tooltip-text">Connect with us on LinkedIn</span>
+            </a>
+            <a href="https://github.com/solarev" target="_blank" class="text-muted text-decoration-none custom-tooltip" data-bs-toggle="tooltip" title="Check our GitHub">
+              <i class="bi bi-github"></i>
+              <span class="tooltip-text">Explore our GitHub repositories</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="cap916.html" class="text-muted text-decoration-none"><i class="bi bi-house-door me-2"></i>Home</a></li>
+            <li class="mb-2"><a href="pag2.html" class="text-muted text-decoration-none"><i class="bi bi-gear me-2"></i>How It Works</a></li>
+            <li class="mb-2"><a href="pag3.html" class="text-muted text-decoration-none"><i class="bi bi-graph-up me-2"></i>Benefits</a></li>
+            <li class="mb-2"><a href="pag4.html" class="text-muted text-decoration-none"><i class="bi bi-grid me-2"></i>Products</a></li>
+            <li class="mb-2"><a href="pag5.html" class="text-muted text-decoration-none"><i class="bi bi-envelope me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <h5 class="mb-3">Contact Us</h5>
+          <ul class="list-unstyled text-muted">
+            <li class="mb-2">
+              <a href="https://maps.google.com" target="_blank" class="text-muted text-decoration-none">
+                <i class="bi bi-geo-alt me-2"></i> 123 Solar Street, Green City
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="tel:+15551234567" class="text-muted text-decoration-none">
+                <i class="bi bi-telephone me-2"></i> +91 9573687736
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="mailto:info@solarev.com" class="text-muted text-decoration-none">
+                <i class="bi bi-envelope me-2"></i> info@solarev.com
+              </a>
+            </li>
+            <li class="mb-2">
+              <i class="bi bi-clock me-2"></i> Mon-Fri: 9:00 AM - 6:00 PM
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="col-lg-3">
+          <h5 class="mb-3">Newsletter</h5>
+          <p class="text-muted">Subscribe to our newsletter for updates and exclusive offers.</p>
+          <form class="newsletter-form">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Enter your email" required>
+              <button class="btn btn-warning" type="submit">
+                <i class="bi bi-send me-2"></i>Subscribe
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <hr class="my-4 bg-light">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="text-muted mb-0">
+            <i class="bi bi-c-circle me-2"></i>2024 SolarEV. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="text-muted text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#privacyModal">
+            <i class="bi bi-shield-lock me-2"></i>Privacy Policy
+          </a>
+          <a href="#" class="text-muted text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">
+            <i class="bi bi-file-text me-2"></i>Terms of Service
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Last updated: March 2024</p>
+          <h6>1. Information We Collect</h6>
+          <p>We collect information that you provide directly to us, including name, email address, and other contact information.</p>
+          <h6>2. How We Use Your Information</h6>
+          <p>We use the information we collect to provide, maintain, and improve our services.</p>
+          <h6>3. Information Sharing</h6>
+          <p>We do not sell or share your personal information with third parties.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Service Modal -->
+  <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Last updated: March 2024</p>
+          <h6>1. Acceptance of Terms</h6>
+          <p>By accessing and using this website, you accept and agree to be bound by these terms.</p>
+          <h6>2. Use License</h6>
+          <p>Permission is granted to temporarily download materials for personal, non-commercial use only.</p>
+          <h6>3. Disclaimer</h6>
+          <p>The materials on this website are provided on an 'as is' basis.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>Success!
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for contacting us! We have received your message and will get back to you soon.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add popup for form submission -->
+  <div class="popup-overlay" id="formPopup">
+    <div class="popup-content">
+      <h5 class="mb-3">Thank You!</h5>
+      <p>Your message has been sent successfully. We'll get back to you soon.</p>
+      <button class="btn btn-primary" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <!-- Add alert container -->
+  <div id="alertContainer"></div>
+
+  <style>
+    /* Footer Styles */
+    .footer {
+      background: linear-gradient(to right, #1a1a1a, #2d2d2d);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+      margin-top: 50px;
+      z-index: 1000;
+    }
+
+    .footer .container-fluid {
+      padding: 0 30px;
+    }
+
+    .footer h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      color: #FFC107;
+    }
+
+    .footer p {
+      color: #ffffff;
+    }
+
+    .footer .social-links a {
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      padding: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFC107;
+    }
+
+    .footer .social-links a:hover {
+      color: #ffffff !important;
+      background: rgba(255, 193, 7, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .footer .list-unstyled a {
+      transition: all 0.3s ease;
+      display: inline-block;
+      padding: 4px 0;
+      color: #ffffff;
+    }
+
+    .footer .list-unstyled a:hover {
+      color: #FFC107 !important;
+      transform: translateX(5px);
+    }
+
+    .footer .list-unstyled li {
+      color: #ffffff;
+    }
+
+    .footer .newsletter-form .form-control {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    .footer .newsletter-form .form-control:focus {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #FFC107;
+      color: #ffffff;
+      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    }
+
+    .footer .newsletter-form .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer .btn-warning {
+      background-color: #FFC107;
+      border-color: #FFC107;
+      color: #000000;
+      transition: all 0.3s ease;
+    }
+
+    .footer .btn-warning:hover {
+      background-color: #ffffff;
+      border-color: #ffffff;
+      color: #000000;
+      transform: translateY(-2px);
+    }
+
+    .footer hr {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .footer .text-muted {
+      color: #ffffff !important;
+    }
+
+    .footer .text-muted a {
+      color: #ffffff !important;
+    }
+
+    .footer .text-muted a:hover {
+      color: #FFC107 !important;
+    }
+
+    @media (max-width: 768px) {
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+      }
+      
+      .footer .container-fluid {
+        padding: 0 15px;
+      }
+      
+      .footer .social-links {
+        margin: 1rem 0;
+      }
+      
+      .footer .social-links a {
+        margin: 0 5px;
+      }
+      
+      .footer .newsletter-form {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .footer .list-unstyled a:hover {
+        transform: none;
+      }
+    }
+  </style>
+
+  <script>
+    // Newsletter Form Submission
+    document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      if (email) {
+        const successMessage = document.createElement('div');
+        successMessage.className = 'alert alert-success mt-3';
+        successMessage.innerHTML = '<i class="bi bi-check-circle me-2"></i>Thank you for subscribing to our newsletter!';
+        this.appendChild(successMessage);
+        this.reset();
+        setTimeout(() => successMessage.remove(), 5000);
+      }
+    });
+
+    // Add hover effect to contact links
+    document.querySelectorAll('.footer .list-unstyled a').forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateX(5px)';
+      });
+      link.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateX(0)';
+      });
+    });
+
+    // Initialize Bootstrap tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+
+    // Function to show alert
+    function showAlert(message, type = 'success') {
+      const alertContainer = document.getElementById('alertContainer');
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type} alert-custom alert-dismissible fade show`;
+      alert.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      `;
+      alertContainer.appendChild(alert);
+      setTimeout(() => {
+        alert.remove();
+      }, 5000);
+    }
+
+    // Function to show popup
+    function showPopup() {
+      const popup = document.getElementById('formPopup');
+      if (popup) {
+        popup.style.display = 'block';
+      }
+    }
+
+    // Function to close popup
+    function closePopup() {
+      const popup = document.getElementById('formPopup');
+      if (popup) {
+        popup.style.display = 'none';
+      }
+    }
+
+    // Update form submission handler
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        date: new Date().toLocaleString()
+      };
+
+      // Validate form data
+      if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
+        showAlert('Please fill in all fields', 'danger');
+        return;
+      }
+
+      // Add data to table
+      addToTable(formData);
+
+      // Show success popup
+      showPopup();
+
+      // Show success alert
+      showAlert('Your message has been sent successfully!');
+
+      // Reset form
+      this.reset();
+    });
+
+    // Function to add data to table
+    function addToTable(data) {
+      const tbody = document.querySelector('#userInputTable tbody');
+      if (!tbody) {
+        console.error('Table body not found');
+        return;
+      }
+      
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${data.name}</td>
+        <td>${data.email}</td>
+        <td>${data.phone}</td>
+        <td>${data.subject}</td>
+        <td>${data.message.substring(0, 30)}...</td>
+        <td>${data.date}</td>
+        <td>
+          <button class="btn btn-action btn-view" onclick="viewDetails(this)">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-action btn-delete" onclick="deleteEntry(this)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `;
+      
+      tbody.insertBefore(tr, tbody.firstChild);
+    }
+
+    // Function to view full details
+    function viewDetails(button) {
+      const row = button.closest('tr');
+      const cells = row.cells;
+      const message = cells[4].textContent;
+      
+      // Create modal content
+      const modalContent = `
+        <div class="modal fade" id="detailsModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Inquiry Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <p><strong>Name:</strong> ${cells[0].textContent}</p>
+                <p><strong>Email:</strong> ${cells[1].textContent}</p>
+                <p><strong>Phone:</strong> ${cells[2].textContent}</p>
+                <p><strong>Subject:</strong> ${cells[3].textContent}</p>
+                <p><strong>Message:</strong> ${message}</p>
+                <p><strong>Date:</strong> ${cells[5].textContent}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Add modal to document
+      document.body.insertAdjacentHTML('beforeend', modalContent);
+      
+      // Show modal
+      const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+      modal.show();
+      
+      // Remove modal after it's hidden
+      document.getElementById('detailsModal').addEventListener('hidden.bs.modal', function() {
+        this.remove();
+      });
+    }
+
+    // Function to delete entry
+    function deleteEntry(button) {
+      if (confirm('Are you sure you want to delete this entry?')) {
+        button.closest('tr').remove();
+        showAlert('Entry deleted successfully!', 'info');
+      }
+    }
+
+    // Add hover effects to tooltips
+    document.querySelectorAll('.custom-tooltip').forEach(element => {
+      element.addEventListener('mouseenter', function() {
+        this.querySelector('.tooltip-text').style.opacity = '1';
+      });
+      element.addEventListener('mouseleave', function() {
+        this.querySelector('.tooltip-text').style.opacity = '0';
+      });
+    });
+  </script>
+</body>
+</html>
